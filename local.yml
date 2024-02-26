@@ -1,7 +1,9 @@
 ---
+
 - hosts: localhost
   connection: local
   become: true
+
 
   tasks:
   - name: Installing Htop to Desktop
@@ -11,6 +13,7 @@
         - tmux
         - vim-nox
 
+
   - name: Copy wallpaper file
     copy:
       src: files/wallpaper.jpg
@@ -19,13 +22,15 @@
       group: root
 
   - name: set wallpaper
-       dconf:
-        key: "/org/gnome/desktop/background/picture-uri"
-        value: "'file:///usr/share/background/ansible-wallpaper.jpg'"
+    become_user: nightking
+    dconf:
+      key: "/org/gnome/desktop/background/picture-uri"
+      value: "'file:///usr/share/background/ansible-wallpaper.jpg'"
 
   - name: set wallpaper position
-       dconf: 
-        key: "/org/gnome/desktop/background/picture-options"
-        value: "'zoom'"
+    become_user: nightkingd
+    dconf: 
+      key: "/org/gnome/desktop/background/picture-options"
+      value: "'zoom'"
 ...
 
